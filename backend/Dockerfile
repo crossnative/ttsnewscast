@@ -4,13 +4,15 @@ WORKDIR /app
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-COPY pyproject.toml ./
+COPY pyproject.toml uv.lock ./
 
-RUN uv pip install --system --no-cache \
-    "newspaper4k[nlp]" fastapi uvicorn
+RUN uv sync --frozen --no-dev --no-install-project
 
 COPY api.py .
+COPY ttsnewscast ./ttsnewscast
+
+ENV PATH="/app/.venv/bin:$PATH"
 
 EXPOSE 8000
 
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "ttsnewscast.api:app", "--host", "0.0.0.0", "--port", "8000"]

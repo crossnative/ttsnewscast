@@ -1,0 +1,10 @@
+.url-card {
+    max-width: 40em;
+    margin: 2em auto;
+
+    mat-card-content > * {
+        width: 100%;
+    }
+
+
+}

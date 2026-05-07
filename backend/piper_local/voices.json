@@ -1,0 +1,38 @@
+{
+  "en_US-lessac-high": {
+    "description": "English (US) - Lessac, high quality",
+    "language": "en_US",
+    "model_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/high/en_US-lessac-high.onnx",
+    "config_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/high/en_US-lessac-high.onnx.json"
+  },
+  "en_US-lessac-medium": {
+    "description": "English (US) - Lessac, medium quality",
+    "language": "en_US",
+    "model_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium/en_US-lessac-medium.onnx",
+    "config_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/lessac/medium/en_US-lessac-medium.onnx.json"
+  },
+  "en_US-amy-medium": {
+    "description": "English (US) - Amy, medium quality",
+    "language": "en_US",
+    "model_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/amy/medium/en_US-amy-medium.onnx",
+    "config_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/amy/medium/en_US-amy-medium.onnx.json"
+  },
+  "en_US-joe-medium": {
+    "description": "English (US) - Joe, medium quality",
+    "language": "en_US",
+    "model_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/joe/medium/en_US-joe-medium.onnx",
+    "config_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/joe/medium/en_US-joe-medium.onnx.json"
+  },
+  "en_GB-alan-medium": {
+    "description": "English (GB) - Alan, medium quality",
+    "language": "en_GB",
+    "model_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_GB/alan/medium/en_GB-alan-medium.onnx",
+    "config_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_GB/alan/medium/en_GB-alan-medium.onnx.json"
+  },
+  "de_DE-thorsten-high": {
+    "description": "German (DE) - Thorsten, high quality",
+    "language": "de_DE",
+    "model_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/de/de_DE/thorsten/high/de_DE-thorsten-high.onnx",
+    "config_url": "https://huggingface.co/rhasspy/piper-voices/resolve/main/de/de_DE/thorsten/high/de_DE-thorsten-high.onnx.json"
+  }
+}

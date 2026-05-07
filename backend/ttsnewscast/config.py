@@ -23,11 +23,11 @@ ELEVENLABS_MODELS: list[ModelInfo] = [
 ]
 
 ELEVENLABS_VOICES: list[VoiceInfo] = [
-    VoiceInfo(voice_id="JBFqnCBsd6RMkjVDRZzb", name="George", language="en"),
-    VoiceInfo(voice_id="EXAVITQu4vr4xnSDxMaL", name="Bella",  language="en"),
-    VoiceInfo(voice_id="TX3LPaxmHKxFdv7VOQHJ", name="Liam",   language="en"),
-    VoiceInfo(voice_id="pFZP5JQG7iQjIQuC4Bku", name="Lily",   language="en"),
-    VoiceInfo(voice_id="onwK4e9ZLuTAKqWW03F9", name="Daniel", language="en"),
+    VoiceInfo(voice_id="JBFqnCBsd6RMkjVDRZzb", description="George", language="en"),
+    VoiceInfo(voice_id="EXAVITQu4vr4xnSDxMaL", description="Bella",  language="en"),
+    VoiceInfo(voice_id="TX3LPaxmHKxFdv7VOQHJ", description="Liam",   language="en"),
+    VoiceInfo(voice_id="pFZP5JQG7iQjIQuC4Bku", description="Lily",   language="en"),
+    VoiceInfo(voice_id="onwK4e9ZLuTAKqWW03F9", description="Daniel", language="en"),
 ]
 
 # ---------------------------------------------------------------------------

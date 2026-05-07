@@ -22,3 +22,11 @@ print()
 print(article.text)
 
 text = article.title + "\n" + article.text
+
+
+from lingua import Language, LanguageDetectorBuilder
+# languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH]
+# detector = LanguageDetectorBuilder.from_languages(*languages).build()
+detector = LanguageDetectorBuilder.from_all_languages().with_preloaded_language_models().build()
+language = detector.detect_language_of(text)
+print(language)

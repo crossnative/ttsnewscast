@@ -41,7 +41,11 @@ class ArticleRequest(BaseModel):
     properties: ArticleProperties
 
 
-class ArticleResponse(BaseModel):
+class ExtractRequest(BaseModel):
+    url: HttpUrl
+
+
+class ExtractResponse(BaseModel):
     title: str
     authors: list[str]
     publish_date: str | None
@@ -49,6 +53,21 @@ class ArticleResponse(BaseModel):
     keywords: list[str]
     summary: str
     text: str
+
+
+class TTSRequest(BaseModel):
+    text: str
+    properties: ArticleProperties
+
+
+class TTSResponse(BaseModel):
+    audio_provider: str
+    audio_mime_type: str
+    audio_base64: str
+    audio_url: str
+
+
+class ArticleResponse(ExtractResponse):
     audio_provider: str
     audio_mime_type: str
     audio_base64: str

@@ -20,8 +20,7 @@ class ArticleExtractorService:
         article = Article(url)
         article.download()
         article.parse()
-        article.nlp()
-
+        
         return ExtractedArticle(
             title=article.title,
             authors=[unescape(author) for author in article.authors],

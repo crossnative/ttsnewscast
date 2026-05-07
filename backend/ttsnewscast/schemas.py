@@ -49,6 +49,7 @@ class ArticleProperties(BaseModel):
             return None
 
         normalized = value.strip()
+
         if not normalized:
             raise ValueError("api_key must not be blank")
         return normalized

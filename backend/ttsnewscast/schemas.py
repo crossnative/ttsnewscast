@@ -1,6 +1,32 @@
 from pydantic import BaseModel, HttpUrl, field_validator, model_validator
 
 
+# ---------------------------------------------------------------------------
+# TTS models endpoint
+# ---------------------------------------------------------------------------
+
+class ModelInfo(BaseModel):
+    model_id: str
+    description: str
+
+
+class VoiceInfo(BaseModel):
+    voice_id: str
+    name: str | None = None
+    description: str | None = None
+    language: str
+
+
+class ProviderInfo(BaseModel):
+    name: str
+    requires_api_key: bool
+    models: list[ModelInfo] = []
+    voices: list[VoiceInfo] = []
+
+
+AvailableModelsResponse = list[ProviderInfo]
+
+
 class ArticleProperties(BaseModel):
     provider: str
     api_key: str | None = None

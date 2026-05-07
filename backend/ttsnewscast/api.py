@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 
-from .schemas import ArticleRequest, ArticleResponse
+from .config import get_available_models
+from .schemas import ArticleRequest, ArticleResponse, AvailableModelsResponse, ProviderInfo
 from .services.article_extractor import ArticleExtractorService
 from .services.article_pipeline import ArticlePipelineService
 from .services.audio_storage import AudioStorageService
@@ -13,6 +14,11 @@ article_pipeline = ArticlePipelineService(
     extractor=ArticleExtractorService(),
     audio_storage=audio_storage,
 )
+
+
+@app.get("/models", response_model=list[ProviderInfo])
+def list_models() -> AvailableModelsResponse:
+    return get_available_models()
 
 
 @app.post("/extract", response_model=ArticleResponse)

@@ -1,0 +1,20 @@
+[project]
+name = "ttsnewscast"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    # "kokoro>=0.7.16",
+    # "misaki[en]>=0.7.17",
+    # "soundfile>=0.13.1",
+    # "torch>=2.6.0",
+    # "lxml[html-clean] (>=5.3.1,<6.0.0)",
+    "TTS>=0.22.0",
+    "pip>=25.0.1",
+    # "multidict>=6.4",
+    # "spacy>=3.8.3,<4.0.0",  # Matches audiblez's requirement
+    # "xx_ent_wiki_sm @ https://github.com/explosion/spacy-models/releases/download/xx_ent_wiki_sm-3.8.0/xx_ent_wiki_sm-3.8.0.tar.gz",
+    # "newspaper4k>=0.9.5",
+    "piper-tts>=1.4.2",
+]

@@ -2,8 +2,14 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+COPY pyproject.toml ./
+
+RUN uv pip install --system --no-cache \
+    "newspaper4k[nlp]" fastapi uvicorn
+
 COPY api.py .
-RUN pip install --no-cache-dir fastapi uvicorn newspaper4k lxml_html_clean
 
 EXPOSE 8000
 

@@ -21,7 +21,7 @@ class ArticleResponse(BaseModel):
     text: str
 
 
-@app.post("/extract", response_model=ArticleResponse)
+@app.post("/api/extract", response_model=ArticleResponse)
 def extract_article(req: ArticleRequest):
     try:
         article = Article(req.url)

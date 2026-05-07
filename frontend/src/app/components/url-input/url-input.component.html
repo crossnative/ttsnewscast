@@ -1,13 +1,63 @@
 <mat-card appearance="outlined" class="url-card">
     <mat-card-content>
-        <mat-form-field class="url-form-field">
-            <mat-label>Enter URL</mat-label>
-            <input matInput placeholder="https://example.com" [(ngModel)]="url">
-            
+        <mat-form-field class="url-field" appearance="outline">
+            <mat-label>Article URL</mat-label>
+            <mat-icon matPrefix>link</mat-icon>
+            <input matInput
+                   placeholder="https://example.com/article"
+                   [(ngModel)]="url"
+                   [disabled]="loading()"
+                   (keydown.enter)="onSubmit()">
         </mat-form-field>
-        <div class="button-row">
-            <button matButton="elevated" (click)="onSubmit()">Go!</button>
+
+        <div class="provider-section">
+            <label class="section-label">Audio Provider</label>
+            <mat-button-toggle-group
+                [value]="provider()"
+                (change)="provider.set($event.value)"
+                [disabled]="loading()"
+                class="provider-toggle"
+                hideSingleSelectionIndicator>
+                <mat-button-toggle value="piper">
+                    <mat-icon>speaker</mat-icon>
+                    Piper (Local)
+                </mat-button-toggle>
+                <mat-button-toggle value="elevenlabs">
+                    <mat-icon>cloud</mat-icon>
+                    ElevenLabs
+                </mat-button-toggle>
+            </mat-button-toggle-group>
         </div>
-        
+
+        @if (isElevenLabs()) {
+            <mat-form-field class="api-key-field" appearance="outline">
+                <mat-label>ElevenLabs API Key</mat-label>
+                <mat-icon matPrefix>key</mat-icon>
+                <input matInput
+                       type="password"
+                       placeholder="sk-..."
+                       [(ngModel)]="apiKey"
+                       [disabled]="loading()">
+            </mat-form-field>
+        }
+
+        <div class="action-row">
+            @if (loading()) {
+                <mat-spinner diameter="32"></mat-spinner>
+                <span class="loading-label">Extracting article & generating audio...</span>
+            } @else {
+                <button mat-flat-button
+                        class="submit-btn"
+                        (click)="onSubmit()"
+                        [disabled]="!canSubmit()">
+                    <mat-icon>headphones</mat-icon>
+                    Listen
+                </button>
+            }
+        </div>
+
+        @if (error()) {
+            <p class="error-text">{{ error() }}</p>
+        }
     </mat-card-content>
 </mat-card>

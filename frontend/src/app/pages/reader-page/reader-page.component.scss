@@ -1,0 +1,129 @@
+:host {
+    display: block;
+}
+
+// ── Top bar ──
+.top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    background: var(--mat-sys-surface);
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+}
+
+.top-bar-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--mat-sys-primary);
+}
+
+// ── Sticky audio bar ──
+.audio-bar {
+    position: sticky;
+    top: 3rem; // below top-bar
+    z-index: 9;
+    padding: 0.5rem 1rem;
+    background: var(--mat-sys-surface-container);
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+
+    audio {
+        width: 100%;
+        display: block;
+    }
+}
+
+.audio-loading,
+.audio-error {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--mat-sys-on-surface-variant);
+}
+
+.audio-error {
+    color: var(--mat-sys-error);
+}
+
+// ── Article ──
+.article {
+    max-width: 42rem;
+    margin: 0 auto;
+}
+
+.hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+
+    @media (min-width: 600px) {
+        border-radius: 0 0 0.75rem 0.75rem;
+    }
+}
+
+.article-body {
+    padding: 1.25rem 1rem 3rem;
+
+    @media (min-width: 600px) {
+        padding: 1.5rem 0 4rem;
+    }
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.5rem;
+
+    @media (min-width: 600px) {
+        font-size: 2rem;
+    }
+}
+
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    font-size: 0.85rem;
+    color: var(--mat-sys-on-surface-variant);
+    margin-bottom: 1.5rem;
+}
+
+.summary-card {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    background: var(--mat-sys-surface-container);
+    border-radius: 0.75rem;
+
+    h2 {
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--mat-sys-on-surface-variant);
+        margin: 0 0 0.5rem;
+    }
+
+    p {
+        margin: 0;
+        line-height: 1.6;
+    }
+}
+
+.text-body {
+    p {
+        white-space: pre-wrap;
+        line-height: 1.8;
+        font-size: 1.05rem;
+        margin: 0;
+
+        @media (min-width: 600px) {
+            font-size: 1.1rem;
+        }
+    }
+}

@@ -1,1 +1,54 @@
-<p>reader-page works!</p>
+@if (article(); as a) {
+    <header class="top-bar">
+        <button mat-icon-button (click)="goBack()" aria-label="Back">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span class="top-bar-title">Newscast</span>
+    </header>
+
+    <div class="audio-bar">
+        @if (audioLoading()) {
+            <div class="audio-loading">
+                <mat-spinner diameter="24"></mat-spinner>
+                <span>Generating audio...</span>
+            </div>
+        } @else if (audioError()) {
+            <div class="audio-error">
+                <mat-icon>error_outline</mat-icon>
+                <span>{{ audioError() }}</span>
+            </div>
+        } @else if (audioSrc) {
+            <audio controls [src]="audioSrc" preload="metadata"></audio>
+        }
+    </div>
+
+    <article class="article">
+        @if (a.top_image) {
+            <img [src]="a.top_image" alt="" class="hero-image">
+        }
+
+        <div class="article-body">
+            <h1 class="title">{{ a.title }}</h1>
+
+            <div class="meta">
+                @if (a.authors.length) {
+                    <span class="authors">{{ a.authors.join(', ') }}</span>
+                }
+                @if (a.publish_date) {
+                    <span class="date">{{ a.publish_date }}</span>
+                }
+            </div>
+
+            @if (a.summary) {
+                <section class="summary-card">
+                    <h2>Summary</h2>
+                    <p>{{ a.summary }}</p>
+                </section>
+            }
+
+            <section class="text-body">
+                <p>{{ a.text }}</p>
+            </section>
+        </div>
+    </article>
+}

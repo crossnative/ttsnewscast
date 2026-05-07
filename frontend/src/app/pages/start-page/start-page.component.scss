@@ -1,6 +1,41 @@
-main div.container {
+:host {
+    display: block;
+    height: 100%;
+}
+
+main {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 1rem;
+}
+
+.hero {
+    width: 100%;
+    max-width: 32rem;
+    text-align: center;
+}
+
+.brand {
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.25rem;
+    color: var(--mat-sys-primary);
+
+    @media (min-width: 600px) {
+        font-size: 2.75rem;
+    }
+}
+
+.tagline {
+    font-size: 0.9rem;
+    color: var(--mat-sys-on-surface-variant);
+    margin: 0 0 2rem;
+
+    @media (min-width: 600px) {
+        font-size: 1rem;
+    }
 }

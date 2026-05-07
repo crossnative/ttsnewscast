@@ -1,15 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { ArticleProperties, ExtractResponse, TtsResponse } from '../models/article.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TtsService {
-  public readonly BACKEND_URL = 'http://localhost:8000';
-
   private readonly http = inject(HttpClient);
 
-  getArticle(url: string) {
-    return this.http.post(`/api/extract`, { url });
+  extractText(url: string) {
+    return this.http.post<ExtractResponse>('/api/extract-text', { url });
+  }
+
+  synthesize(text: string, properties: ArticleProperties) {
+    return this.http.post<TtsResponse>('/api/tts', { text, properties });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed } from '@angular/core';
+import { Component, inject, signal, computed, effect } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -20,15 +20,34 @@ import { ArticleProperties } from '../../models/article.model';
   templateUrl: './url-input.component.html',
   styleUrl: './url-input.component.scss',
 })
+const ELEVENLABS_API_KEY_STORAGE = 'tts.elevenlabs.apiKey';
+
 export class UrlInput {
   private readonly ttsService = inject(TtsService);
   private readonly router = inject(Router);
 
-  url = signal('https://knightcolumbia.org/content/ai-as-normal-technology');
+  url = signal('');
   provider = signal<'piper' | 'elevenlabs'>('piper');
-  apiKey = signal('');
+  apiKey = signal(this.loadStoredApiKey());
   loading = signal(false);
   error = signal<string | null>(null);
+
+  constructor() {
+    effect(() => {
+      const key = this.apiKey();
+      if (typeof localStorage === 'undefined') return;
+      if (key) {
+        localStorage.setItem(ELEVENLABS_API_KEY_STORAGE, key);
+      } else {
+        localStorage.removeItem(ELEVENLABS_API_KEY_STORAGE);
+      }
+    });
+  }
+
+  private loadStoredApiKey(): string {
+    if (typeof localStorage === 'undefined') return '';
+    return localStorage.getItem(ELEVENLABS_API_KEY_STORAGE) ?? '';
+  }
 
   isElevenLabs = computed(() => this.provider() === 'elevenlabs');
 

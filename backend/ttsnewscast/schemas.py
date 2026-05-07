@@ -31,6 +31,8 @@ class ArticleProperties(BaseModel):
     def validate_provider_requirements(self) -> "ArticleProperties":
         if self.provider == "elevenlabs" and not self.api_key:
             raise ValueError("api_key is required for provider 'elevenlabs'")
+        if self.provider == "piper" and self.api_key:
+            raise ValueError("api_key is not used by provider 'piper'")
         return self
 
 

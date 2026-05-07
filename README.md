@@ -16,4 +16,4 @@ curl -X POST http://localhost:8000/extract \                                    
 
 `docker build -t ttsnewscast:0.1.0 .`
 
-`docker run -p 8000:8000 ttsnewscast`
+`docker run -p 8000:8000 ttsnewscast:0.1.0`

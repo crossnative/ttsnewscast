@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { TtsService } from '../../services/tts.service';
 import { ArticleProperties } from '../../models/article.model';
 
+const ELEVENLABS_API_KEY_STORAGE = 'tts.elevenlabs.apiKey';
+
 @Component({
   selector: 'app-url-input',
   imports: [
@@ -20,8 +22,6 @@ import { ArticleProperties } from '../../models/article.model';
   templateUrl: './url-input.component.html',
   styleUrl: './url-input.component.scss',
 })
-const ELEVENLABS_API_KEY_STORAGE = 'tts.elevenlabs.apiKey';
-
 export class UrlInput {
   private readonly ttsService = inject(TtsService);
   private readonly router = inject(Router);

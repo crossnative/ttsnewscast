@@ -8,11 +8,18 @@ export interface ExtractResponse {
     text: string;
 }
 
+export interface AudioAlignment {
+    characters: string[];
+    character_start_times_seconds: number[];
+    character_end_times_seconds: number[];
+}
+
 export interface TtsResponse {
     audio_provider: string;
     audio_mime_type: string;
     audio_base64: string;
     audio_url: string;
+    alignment?: AudioAlignment | null;
 }
 
 export interface ArticleProperties {

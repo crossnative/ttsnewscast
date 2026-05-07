@@ -17,14 +17,17 @@ from .services.article_extractor import ArticleExtractorService
 from .services.article_pipeline import ArticlePipelineService
 from .services.audio_storage import AudioStorageService
 from .services.tts.factory import get_tts_service
+from .services.tts_cache import TtsCacheService
 
 app = FastAPI(title="Article Extractor API")
 
 audio_storage = AudioStorageService()
+tts_cache = TtsCacheService(audio_storage=audio_storage)
 article_extractor = ArticleExtractorService()
 article_pipeline = ArticlePipelineService(
     extractor=article_extractor,
     audio_storage=audio_storage,
+    tts_cache=tts_cache,
 )
 
 
@@ -65,14 +68,30 @@ def extract_text(req: ExtractRequest) -> ExtractResponse:
 @app.post("/tts", response_model=TTSResponse)
 def text_to_speech(req: TTSRequest) -> TTSResponse:
     try:
-        tts_service = get_tts_service(req.properties.provider)
-        audio_result = tts_service.synthesize(req.text, req.properties)
-        audio_id = audio_storage.save(audio_result.audio_bytes, audio_result.extension)
+        cacheable = tts_cache.is_cacheable(req.properties)
+        cache_key = tts_cache.make_key(req.text, req.properties) if cacheable else None
+
+        audio_result = tts_cache.load(cache_key) if cache_key else None
+
+        if audio_result is None:
+            tts_service = get_tts_service(req.properties.provider)
+            audio_result = tts_service.synthesize(req.text, req.properties)
+            if cache_key is not None:
+                tts_cache.store(cache_key, audio_result)
+                audio_id = cache_key
+            else:
+                audio_id = audio_storage.save(
+                    audio_result.audio_bytes, audio_result.extension
+                )
+        else:
+            audio_id = cache_key  # type: ignore[assignment]
+
         return TTSResponse(
             audio_provider=audio_result.provider,
             audio_mime_type=audio_result.mime_type,
             audio_base64=audio_result.audio_base64,
             audio_url=f"/audio/{audio_id}.{audio_result.extension}",
+            alignment=audio_result.alignment,
         )
     except HTTPException:
         raise
@@ -86,7 +105,8 @@ def get_audio(file_name: str):
     if not audio_path.is_file():
         raise HTTPException(status_code=404, detail="Audio file not found")
 
-    return FileResponse(audio_path, media_type="audio/mpeg")
+    media_type = "audio/wav" if file_name.lower().endswith(".wav") else "audio/mpeg"
+    return FileResponse(audio_path, media_type=media_type)
 
 
 if __name__ == "__main__":

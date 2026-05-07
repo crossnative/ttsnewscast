@@ -87,11 +87,24 @@ class TTSRequest(BaseModel):
     properties: ArticleProperties
 
 
+class AudioAlignment(BaseModel):
+    """Per-character timing data for synthesized audio.
+
+    The arrays are parallel: ``characters[i]`` is spoken from
+    ``character_start_times_seconds[i]`` to ``character_end_times_seconds[i]``.
+    """
+
+    characters: list[str]
+    character_start_times_seconds: list[float]
+    character_end_times_seconds: list[float]
+
+
 class TTSResponse(BaseModel):
     audio_provider: str
     audio_mime_type: str
     audio_base64: str
     audio_url: str
+    alignment: AudioAlignment | None = None
 
 
 class ArticleResponse(ExtractResponse):
@@ -99,3 +112,4 @@ class ArticleResponse(ExtractResponse):
     audio_mime_type: str
     audio_base64: str
     audio_url: str
+    alignment: AudioAlignment | None = None

@@ -18,7 +18,12 @@
                 <span>{{ audioError() }}</span>
             </div>
         } @else if (audioSrc) {
-            <audio controls [src]="audioSrc" preload="metadata"></audio>
+            <audio #audioEl
+                   controls
+                   [src]="audioSrc"
+                   preload="metadata"
+                   (timeupdate)="onTimeUpdate()"
+                   (ended)="onAudioEnded()"></audio>
         }
     </div>
 
@@ -47,7 +52,13 @@
             }
 
             <section class="text-body">
-                <p>{{ a.text }}</p>
+                <p>@for (tok of tokens(); track $index) {<span
+                        class="token"
+                        [class.active]="$index === currentTokenIndex()"
+                        [class.clickable]="tok.start !== null"
+                        [attr.data-token-index]="$index"
+                        (click)="onTokenClick($index)"
+                    >{{ tok.text }}</span>{{ tok.trailing }}}</p>
             </section>
         </div>
     </article>

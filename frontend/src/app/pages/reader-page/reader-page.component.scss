@@ -126,4 +126,20 @@
             font-size: 1.1rem;
         }
     }
+
+    .token {
+        border-radius: 0.2rem;
+        padding: 0 0.05em;
+        transition: background-color 120ms ease, color 120ms ease;
+
+        &.clickable {
+            cursor: pointer;
+        }
+
+        &.active {
+            background: var(--mat-sys-primary-container, #ffe082);
+            color: var(--mat-sys-on-primary-container, #1a1a1a);
+            box-shadow: 0 0 0 2px var(--mat-sys-primary-container, #ffe082);
+        }
+    }
 }

@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from base64 import b64encode
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
-from ...schemas import ArticleProperties
+from ...schemas import ArticleProperties, AudioAlignment
 
 
 @dataclass(slots=True)
@@ -11,6 +11,7 @@ class TtsAudioResult:
     mime_type: str
     extension: str
     audio_bytes: bytes
+    alignment: AudioAlignment | None = None
 
     @property
     def audio_base64(self) -> str:

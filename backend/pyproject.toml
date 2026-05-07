@@ -12,4 +12,5 @@ dependencies = [
     "newspaper4k>=0.9.5",
     "piper-tts>=1.4.2",
     "uvicorn>=0.46.0",
+    "lingua-language-detector>=2.1.1",
 ]

@@ -21,6 +21,14 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+# IntelliJ config
+.idea
+# Voice models
+*.onnx
+*.onnx.json
+# Audio files
+*.wav
+*.mp3
 
 # Local environment files
 .env
